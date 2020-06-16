@@ -76,85 +76,72 @@ let riverTurtle = new AmazonCreature(
 
 class Shape {
   //your code here...
+  constructor(name, sides, radius, length, width) {
+    this.name = name;
+    this.radius = radius;
+    this.sides = sides;
+    this.length = length;
+    this.width = width;
+  }
+  calcPerimeter() {
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    if (this.name === "circle") {
+      return "Perimeter of given "+this.name + " is "+(2 * Math.PI * this.radius).toFixed(2) + " units";
+    } else {
+      return "Perimeter of given "+this.name + " is "+this.sides.reduce(reducer).toFixed(2) + " units";
+    }
+  }
+  calcArea() {
+    if (this.name === "circle") {
+      return `Area of ${this.name} = ${(Math.PI * this.radius ** 2).toFixed(2)} units`;
+    } else if (this.name === "triangle") {
+      // Heron's formula to find area of a triangle from 3 given sides
+      // area = 0.25 * √((a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c))
+      // Start
+      return `Area of ${this.name} = ${(
+        0.25 *
+        Math.sqrt(
+          (this.sides[0] + this.sides[1] + this.sides[2]) *
+            (-this.sides[0] + this.sides[1] + this.sides[2]) *
+            (this.sides[0] - this.sides[1] + this.sides[2]) *
+            (this.sides[0] + this.sides[1] - this.sides[2])
+        )
+      ).toFixed(2)} units`;
+      // End
+    } else if (this.name === "rectangle") {
+      return `Area of ${this.name} = ${(this.length * this.width).toFixed(2)} units`; // Area = length * width
+    } else if (this.name === "octagon") {
+      return `Area of ${this.name} = ${
+        (2 * this.length ** 2 * (1 + Math.sqrt(2))).toFixed(2) // Area = 2 × s2 × ( 1 + √(2) )
+      } units`;
+    } else if (this.name === "hexagon") {
+      return `Area of ${this.name} = ${
+        (3*Math.sqrt(3) * this.length * this.length / 2).toFixed(2) // Area = (3 * √3 s2)/ 2
+      } units`;
+    } else {
+      return `Area of ${this.name} = ${
+        (
+          (1 / 4) *
+          Math.sqrt(5*(5 + 2 * Math.sqrt(5))) *
+          this.length ** 2
+        ).toFixed(2) //Area = 1/4 x √(5(5 + 2 x √(5))) x s2
+      } units`;
+    }
+  }
 }
 
-const triangle = {
-  name: "triangle",
-  sides: [4, 7, 7], //lengths of each side
-  base: null,
-  height: null, //determine this height using basic geometry.  You may need to research this one.
-  calcArea: function () {
-    console.log(
-      `${this.name}'s area is calculated to be : ${
-        0.5 * this.base * this.height
-      }`
-    );
-  },
-  calcPerimeter: function () {
-    console.log(
-      `${this.name}'s perimeter is calculated to be : ${
-        this.base + (this.sides[1] + this.sides[2])
-      }`
-    );
-  },
-};
+let triangle = new Shape("triangle",[4,7,7], null, null ,null);
+console.log(triangle.calcPerimeter())
+console.log(triangle.calcArea())
 
-triangle.base = triangle.sides[0]; //base is the 1st side in the triangle.sides array.
-triangle.height = 6.71; //determine the height using basic geometry.  How do you calculate the height of a triangle with 2 equal sides?  If you use the formula to caluclate the height, this is a bonus.  If you hard code the correct value here, that will be sufficient, but no bonus :(
+let circle = new Shape("circle", null,5,null,null)
+console.log(circle.calcPerimeter())
+console.log(circle.calcArea())
 
-console.log(triangle);
-triangle.calcArea();
-triangle.calcPerimeter();
+let rectangle = new Shape("rectangle",[4,8,4,8],null,4,8)
+console.log(rectangle.calcPerimeter())
+console.log(rectangle.calcArea())
 
-const rectangle = {
-  name: "rectangle",
-  sides: 4,
-  length: 2,
-  width: 5,
-  calcArea: function () {
-    console.log(
-      `${this.name}'s area is calculated to be : ${this.length * this.width}`
-    );
-  },
-  calcPerimeter: function () {
-    console.log(
-      `${this.name}'s perimeter is calculated to be : ${
-        2 * this.length + 2 * this.width
-      }`
-    );
-  },
-};
-
-console.log(rectangle);
-rectangle.calcArea();
-rectangle.calcPerimeter();
-
-const circle = {
-  name: "circle",
-  sides: 1,
-  radius: 5,
-  calcArea: function () {
-    console.log(
-      `${this.name}'s area is calculated to be : ${(
-        Math.PI *
-        this.radius ** 2
-      ).toFixed(2)}`
-    );
-  },
-  calcCircumference: function () {
-    console.log(
-      `${this.name}'s circumference is calculated to be : ${(
-        2 *
-        Math.PI *
-        this.radius
-      ).toFixed(2)}`
-    );
-  },
-};
-
-console.log(circle);
-circle.calcCircumference();
-circle.calcArea();
 
 /*********************************************** 
 Bonus Exercises:
@@ -164,20 +151,29 @@ Add in  comments explaining the formulas for calculating the perimeter and the a
 Also, as noted above, if you use the formula to calculate the height of the triangle instead of hard coding it, you will also obtain the bonus for this exercise.  
 The dimensions for the triangle are already provided for you in the triangle object literal.*/
 
+let pentagon = new Shape("pentagon",[4,4,4,4,4],null,4,4)
+console.log(pentagon.calcPerimeter())
+console.log(pentagon.calcArea())
+
+let hexagon = new Shape("hexagon", [6,6,6,6,6,6],null, 6,6)
+console.log(hexagon.calcPerimeter())
+console.log(hexagon.calcArea())
+
+let octagon = new Shape("octagon", [8,8,8,8,8,8,8,8], null, 8,8)
+console.log(octagon.calcPerimeter())
+console.log(octagon.calcArea())
+
 /*5. Below is a class Earth.  
 It is instantiated with a earth 'instance'.  
 Because there is only 1 known earth, we don't want multiple instances of earth.  
 Modify the class so the properties are usable WITHOUT instantiating the class.*/
 
-class Earth {
-  name;
-  planetNum; //distance from the sun.  1-mercury, 2-venus, 3-earth, ...
-
+class Planet {
   constructor(name, num) {
     this.name = name;
     this.planetNum = num;
   }
 }
 
-const earth = new Earth("earth", 3);
+const earth = new Planet("earth", 3);
 console.log(earth);
