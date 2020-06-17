@@ -2,7 +2,8 @@
 1. Create a Abstract Creature class that is NOT allowed to be instantiated.
 Find a way to prevent this class from being instantiated with an instance.
 In the Creature class, include two abstract methods:  move(), and act().
-These methods are NOT allowed to be invoked from the Abstract class, so throw an error in these methods if they are invoked by any inherited sub-classes.  
+These methods are NOT allowed to be invoked from the Abstract class, so 
+throw an error in these methods if they are invoked by any inherited sub-classes.  
 
 Create at least 3 sub-classes that inherit from the Abstract Creature Class.  Example sub-classes are: 
     -Human
@@ -23,23 +24,48 @@ Also, each sub-class MUST have at least 2 unique property fields on them.  Examp
 */
 
 class Creature {
-  //your code here...
+  move = () => {
+    // code
+  };
+  act = () => {
+    // code
+  };
 }
 
 class Human extends Creature {
   //your code here...
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
 }
 class Dinosaur extends Creature {
   //your code here...
+  constructor(name, yearsExtinct) {
+    this.name = name;
+    this.yearsExtinct = yearsExtinct;
+  }
 }
 class Bird extends Creature {
   //your code here...
+  constructor(name, size) {
+    this.name = name;
+    this.size = size;
+  }
 }
 class Reptile extends Creature {
   //your code here...
+  constructor(name, habitat) {
+    this.name = name;
+    this.habitat = habitat;
+  }
 }
 class Fish extends Creature {
   //your code here...
+  constructor(name, numOfFins) {
+    this.name = name;
+    this.numOfFins = numOfFins;
+  }
 }
 
 /*
