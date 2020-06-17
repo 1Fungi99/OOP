@@ -11,9 +11,11 @@
 //your code here...
 
 class Book {
-  constructor(_author, _publisher) {
-    this.author = _author;
-    this.publisher = _publisher;
+  #author;
+  #publisher;
+  constructor(author, publisher) {
+    this.#author = author;
+    this.#publisher = publisher;
   }
 
   get getAuthor() {
@@ -32,9 +34,11 @@ class Book {
 }
 
 class Author {
-  constructor(_name, _books) {
-    this.name = _name;
-    this.books = _books;
+  #name;
+  #books;
+  constructor(name, books) {
+    this.#name = name;
+    this.#books = books;
   }
 
   get getName() {
@@ -53,9 +57,11 @@ class Author {
 }
 
 class Publisher {
-  constructor(_author, _books) {
-    this.author = _author;
-    this.books = _books;
+  #author;
+  #books;
+  constructor(author, books) {
+    this.#author = author;
+    this.#books = books;
   }
 
   get getAuthor() {
@@ -74,9 +80,11 @@ class Publisher {
 }
 
 class Review {
-  constructor(_rating, _user) {
-    this.rating = _rating;
-    this.user = _user;
+  #rating;
+  #user;
+  constructor(rating, user) {
+    this.#rating = rating;
+    this.#user = user;
   }
   get getUser() {
     return this.user;
@@ -345,8 +353,8 @@ Bonus Exercise:
 
 3. Building on Exercise 1, Do the following : 
 - Create a Bookstore class.  It should contain a collection of various Book Instances.
-- Each Book Instance should contain the Instances of the relavant Authors, Publishers, and Reviews.
-- Each Publisher should contain Instances of the Authors that are affiliated with the relavant Publisher.  
+- Each Book Instance should contain the Instances of the relevant Authors, Publishers, and Reviews.
+- Each Publisher should contain Instances of the Authors that are affiliated with the relevant Publisher.  
 
 Each Book instance should contain instances of the Authors, the Publishers, and the Reviews pertinent to each book.  This exercise is using the advanced encapsulation concept of "composition", reflecting a "HAS A" relationship.
 */

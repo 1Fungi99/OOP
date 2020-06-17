@@ -24,49 +24,77 @@ Also, each sub-class MUST have at least 2 unique property fields on them.  Examp
 */
 
 class Creature {
+  constructor() {
+    if (this.constructor === Creature) {
+      throw new Error(`Unable to instantiate a new Abstract Class Creature`);
+    }
+  }
   move = () => {
-    // code
+    throw new Error(`Cannot invoke from an Abstract Class`);
   };
+
   act = () => {
-    // code
+    throw new Error(`Cannot invoke from an Abstract Class`);
   };
 }
 
 class Human extends Creature {
-  //your code here...
   constructor(name, age) {
+    super();
     this.name = name;
     this.age = age;
   }
-}
-class Dinosaur extends Creature {
-  //your code here...
-  constructor(name, yearsExtinct) {
-    this.name = name;
-    this.yearsExtinct = yearsExtinct;
-  }
+  move = () => {
+    const directions = ["north", "south", "east", "west"];
+    let direction = directions[Math.floor(Math.random() * 4)];
+    return `${this.name} is moving ${direction}`;
+  };
+  act = () => {
+    return `${this.name} is gathering supplies.`;
+  };
 }
 class Bird extends Creature {
-  //your code here...
   constructor(name, size) {
+    super();
     this.name = name;
     this.size = size;
   }
+
+  move = () => {
+    const directions = ["north", "south", "east", "west"];
+    let direction = directions[Math.floor(Math.random() * 4)];
+    return `${this.name} is flying ${direction}`;
+  };
+  act = () => {
+    return `${this.name} is eyeing the forest, searching for food.`;
+  };
 }
 class Reptile extends Creature {
-  //your code here...
   constructor(name, habitat) {
+    super();
     this.name = name;
     this.habitat = habitat;
   }
+  move = () => {
+    const directions = ["north", "south", "east", "west"];
+    let direction = directions[Math.floor(Math.random() * 4)];
+    return `${this.name} is slithering ${direction}`;
+  };
+  act = () => {
+    return `${this.name} is hiding in wait for prey`;
+  };
 }
-class Fish extends Creature {
-  //your code here...
-  constructor(name, numOfFins) {
-    this.name = name;
-    this.numOfFins = numOfFins;
-  }
-}
+/* TEST ========================================
+let justin = new Human("Justin", 21);
+console.log(justin.move());
+console.log(justin.act());
+let george = new Reptile("George", 21);
+console.log(george.move());
+console.log(george.act());
+let ana = new Bird("ana", 21);
+console.log(ana.move());
+console.log(ana.act());
+============================================= */
 
 /*
 2. For the following Person class, modify the class methods, so the sub-class methods will successfully fire.  
@@ -96,7 +124,7 @@ class Person {
   explain = () => {
     //this function should contain a console.log() explaining what you had to do to get the correct functions to work, and the reasoning behind what you did.
     console.log(
-      "this explain method should contain explain what you had to do to get the correct functions to work, and the reasoning behind what you did."
+      "this explain method should contain an explanation on what you had to do to get the correct functions to work, and the reasoning behind what you did."
     );
   };
 }
@@ -124,33 +152,65 @@ class Teacher extends Person {
   repeat = () => {
     console.log(this.name + " teaches, codes, eats, sleeps, and repeats");
   };
+
+  explain = () => {
+    console.log(
+      "This portion of the Teacher Class Extension just needed a new Method called `explain`"
+    );
+  };
 }
 
 class Student extends Person {
   //set up your methods in this student class, so all of these methods will override the methods from the super class.
-  //eat method should print out - <stduent name> studies, then eats
-  //sleep method should print out, <student name> studies coding so much, that they dream about it in their sleep
-  //code method should print out, <student name> was first overwhelmed by coding, but kept at it, and now has become a coding guru!
-  //repeat method should print out, <student name> keeps on studying, coding, eating, and sleeping, and puts it all on repeat.
+  //eat method should print out - `${this.name} studies, then eats`
+  //sleep method should print out, `${this.name} studies coding so much, that they dream about it in their sleep`
+  //code method should print out, `${this.name} was first overwhelmed by coding, but kept at it, and now has become a coding guru!`
+  //repeat method should print out, `${this.name} keeps on studying, coding, eating, and sleeping, and puts it all on repeat.`
+  constructor(name) {
+    super(name);
+    this.name = name;
+  }
+  eat = () => {
+    console.log(`${this.name} studies, then eats`);
+  };
+  sleep = () => {
+    console.log(
+      `${this.name} studies coding so much, that they dream about it in their sleep`
+    );
+  };
+  code = () => {
+    console.log(
+      `${this.name} was first overwhelmed by coding, but kept at it, and now has become a coding guru!`
+    );
+  };
+  repeat = () => {
+    console.log(
+      `${this.name} keeps on studying, coding, eating, and sleeping, and puts it all on repeat.`
+    );
+  };
+  explain = () => {
+    console.log(
+      `The Student class extension needed each method from the parent class "Person" to be overloaded`
+    );
+  };
 }
 
+/* TEST ========================================
 const teacher = new Teacher("Dr. Teacher");
-
-teacher.explain();
-
 const student = new Student("Pupil Student");
 
-student.explain();
-
+teacher.explain();
 teacher.eat();
 teacher.sleep();
 teacher.code();
 teacher.repeat();
 
+student.explain();
 student.eat();
 student.sleep();
 student.code();
 student.repeat();
+============================================= */
 
 //****************************************************************************************************************************************************************************************
 //Bonus Exercise:
@@ -159,22 +219,22 @@ student.repeat();
 
 class Cook {
   prepare(food1, food2, food3) {
-    console.log("The cook is cooking " + food1, food2, food3);
+    console.log(`The cook is cooking ${food1}, ${food2}, and ${food3}`);
   }
 
-  prepare = () => {
-    console.log("The cook is cooking");
-  };
+  // prepare = () => {
+  //   console.log("The cook is cooking");
+  // };
 
   explain = () => {
     console.log(
-      "what could you do to get the prepare function to print out the food items that are being passed in to the function?  Once you figure it out, Write down your thought process in this explain method."
+      "Delete the second prepare function so it doesn't take priority"
     );
   };
 }
 
+/* TEST ========================================
 const cook = new Cook();
-
 cook.prepare("turkey", "salami", "pizza");
-
 cook.explain();
+============================================= */
