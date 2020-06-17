@@ -115,32 +115,95 @@ class Review {
 
 //your code here...
 class Umbrella {
-  constructor(parentOrg = "Allegis Group") {
+  constructor(
+    parentOrg = "Allegis Group",
+    numOfChildCompanies = 15,
+    totalClients = 100000
+  ) {
     this.parentOrg = parentOrg;
+    this.numOfChildCompanies = numOfChildCompanies;
+    this.totalClients = totalClients;
+  }
+
+  companyRestructure() {
+    console.log(`${this.parentOrg} wants to restructure their companies`);
+  }
+  covidResponse() {
+    console.log(
+      `${this.parentOrg} needs to respond to the recent COVID-19 pandemic`
+    );
   }
 }
 
 class Company extends Umbrella {
-  constructor(parentOrg, name, numOfEmployees) {
-    super(parentOrg);
+  constructor(parentOrg, name, numOfEmployees, numOfChildCompanies) {
+    super(parentOrg, numOfChildCompanies);
     this.name = name;
     this.numOfEmployees = numOfEmployees;
+  }
+
+  planEvent() {
+    console.log(`${this.name} wants to plan a company wide celebration!`);
+  }
+  hostEvent() {
+    console.log(
+      `${this.name} is hosting a ${this.numOfEmployees} employee event!`
+    );
   }
 }
 
 class Site extends Company {
-  constructor(name, location) {
-    super(name);
+  constructor(
+    parentOrg,
+    name,
+    numOfEmployees,
+    location,
+    buildingCondition,
+    numOfBuildings,
+    numOfChildCompanies
+  ) {
+    super(parentOrg, name, numOfEmployees, numOfChildCompanies);
     this.location = location;
+    this.buildingCondition = buildingCondition;
+    this.numOfBuildings = numOfBuildings;
+  }
+
+  buildingRestoration() {
+    console.log(
+      `${this.name} needs their building restored at their ${this.location} branch`
+    );
+  }
+  parkingLotExpansion() {
+    console.log(
+      `${this.name} is expanding their parking lot to accommodate more employees!`
+    );
   }
 }
 
 class Employee extends Company {
-  constructor(parentOrg, name, numOfEmployees, employeeName, jobTitle, salary) {
+  constructor(
+    parentOrg,
+    name,
+    numOfEmployees,
+    employeeName,
+    jobTitle,
+    salary,
+    hoursPerWeek,
+    yearsWorked
+  ) {
     super(parentOrg, name, numOfEmployees);
     this.employeeName = employeeName;
     this.jobTitle = jobTitle;
     this.salary = salary;
+    this.hoursPerWeek = hoursPerWeek;
+    this.yearsWorked = yearsWorked;
+  }
+
+  planMeeting() {
+    console.log(`${this.employeeName} has planned a meeting for this week!`);
+  }
+  attendMeeting() {
+    console.log(`${this.employeeName} is attending a meeting!`);
   }
 }
 
@@ -150,9 +213,30 @@ let TEKSystems = new Company("Allegis Group", "TEKSystems", 30000);
 let AeroTek = new Company("Allegis Group", "AeroTek", 10000);
 let AstonGroup = new Company("Allegis Group", "Aston Group", 1000);
 
-let TEKSystemsSite = new Site("TEKSystems", "Dallas, TX");
-let AeroTekSite = new Site("AeroTek", "Hanover, MD");
-let AstonGroupSite = new Site("Aston Group", "unknown");
+let TEKSystemsSite = new Site(
+  "Allegis Group",
+  "TEKSystems",
+  30000,
+  "Dallas, TX",
+  "good",
+  7
+);
+let AeroTekSite = new Site(
+  "Allegis Group",
+  "AeroTek",
+  10000,
+  "Hanover, MD",
+  "avg",
+  2
+);
+let AstonGroupSite = new Site(
+  "Allegis Group",
+  "Aston Group",
+  1000,
+  "unknown",
+  "bad",
+  3
+);
 
 let John = new Employee(
   "Allegis Group",
@@ -160,7 +244,9 @@ let John = new Employee(
   30000,
   "John",
   "CEO",
-  200000
+  200000,
+  40,
+  15
 );
 let George = new Employee(
   "Allegis Group",
@@ -168,7 +254,9 @@ let George = new Employee(
   30000,
   "George",
   "Manager",
-  100000
+  100000,
+  35,
+  10
 );
 let Lina = new Employee(
   "Allegis Group",
@@ -176,7 +264,9 @@ let Lina = new Employee(
   10000,
   "Lina",
   "Secretary",
-  75000
+  75000,
+  35,
+  5
 );
 let Carter = new Employee(
   "Allegis Group",
@@ -184,7 +274,9 @@ let Carter = new Employee(
   10000,
   "Carter",
   "Engineer",
-  70000
+  70000,
+  45,
+  6
 );
 let Caitlyn = new Employee(
   "Allegis Group",
@@ -192,7 +284,9 @@ let Caitlyn = new Employee(
   10000,
   "Caitlyn",
   "Engineer",
-  70000
+  70000,
+  50,
+  6
 );
 let Barbra = new Employee(
   "Allegis Group",
@@ -200,7 +294,9 @@ let Barbra = new Employee(
   10000,
   "Barbra",
   "Financial Officer",
-  80000
+  80000,
+  50,
+  7
 );
 let Diego = new Employee(
   "Allegis Group",
@@ -208,7 +304,9 @@ let Diego = new Employee(
   1000,
   "Diego",
   "Janitor",
-  30000
+  30000,
+  50,
+  2
 );
 let Ana = new Employee(
   "Allegis Group",
@@ -216,7 +314,9 @@ let Ana = new Employee(
   1000,
   "Ana",
   "Marketer",
-  60000
+  60000,
+  40,
+  1
 );
 let Martin = new Employee(
   "Allegis Group",
@@ -224,7 +324,9 @@ let Martin = new Employee(
   1000,
   "Ana",
   "HR Personnel",
-  65000
+  65000,
+  30,
+  5
 );
 let Xavier = new Employee(
   "Allegis Group",
@@ -232,7 +334,9 @@ let Xavier = new Employee(
   1000,
   "Xavier",
   "Lawyer",
-  120000
+  120000,
+  120,
+  6
 );
 
 /*
